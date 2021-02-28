@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "es2017",
+    "lib": ["ESNext", "dom"],
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "declaration": true
+  },
+  "exclude": [
+    "**/dist",
+    "**/node_modules",
+    "**/test",
+    "**/example",
+    "**/vue3-plugin"
+  ]
+}
