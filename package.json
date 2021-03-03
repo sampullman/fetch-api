@@ -1,11 +1,14 @@
 {
   "name": "@sampullman/fetch-api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Small fetch wrapper for quickly prototyping API clients",
   "main": "dist/fetch-api.umd",
   "module": "dist/fetch-api.esm",
   "types": "dist/fetch-api.d.ts",
-  "files": ["dist", "lib"],
+  "files": [
+    "dist",
+    "lib"
+  ],
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
     "example:dev": "npm -C example run dev",
