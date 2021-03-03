@@ -22,4 +22,6 @@ const plugin = {
   install,
 };
 
+export * from '@sampullman/fetch-api';
+
 export default plugin as unknown as Plugin;
