@@ -5,10 +5,7 @@
   "main": "dist/fetch-api.umd",
   "module": "dist/fetch-api.esm",
   "types": "dist/fetch-api.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "test"
-  },
+  "files": ["dist", "lib"],
   "scripts": {
     "build": "rimraf dist && rollup -c rollup.config.js",
     "example:dev": "npm -C example run dev",
