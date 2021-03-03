@@ -16,6 +16,6 @@
     "**/node_modules",
     "**/test",
     "**/example",
-    "**/vue3-plugin"
+    "**/vue3-fetch-api"
   ]
 }

@@ -11,14 +11,14 @@ export function toArray<T>(arr: void | T | T[]): any[] {
   return [arr];
 }
 
-export function authConfig(config: FetchRequestConfig) {
+export function authConfig(config: RequestInit): RequestInit {
   return {
     ...config,
     credentials: 'include',
   };
 }
 
-export function prepareJson(data: any, config: ResponseInit) {
+export function prepareJson(data: any, config: RequestInit): RequestInit {
   const { headers, ...rest } = config;
   return {
     ...rest,
@@ -31,7 +31,7 @@ export function prepareJson(data: any, config: ResponseInit) {
   };
 }
 
-export function basicAuth(auth: BasicAuth, config: ResponseInit) {
+export function basicAuth(auth: BasicAuth, config: RequestInit): RequestInit {
   const { headers, ...rest } = config;
   const authData = btoa(`${auth.username}:${auth.password}`);
   return {

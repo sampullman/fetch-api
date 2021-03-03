@@ -4,6 +4,7 @@
   "description": "Small fetch wrapper for creating quick API wrappers",
   "main": "dist/fetch-api.umd",
   "module": "dist/fetch-api.esm",
+  "types": "dist/fetch-api.d.ts",
   "directories": {
     "lib": "lib",
     "test": "test"
@@ -12,10 +13,12 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
-    "vue3-plugin:dev": "npm -C vue3-plugin run dev",
-    "vue3-plugin:build": "npm -C vue3-plugin run build",
+    "plugin:dev": "npm -C vue3-fetch-api run dev",
+    "plugin:build": "npm -C vue3-fetch-api run build",
+    "build:all": "npm run build && npm run plugin:build",
     "build:test": "npm run build && jest",
-    "test": "jest"
+    "test": "jest",
+    "release": "npx git-ensure -a && npx bumpp --commit --tag --push"
   },
   "repository": {
     "type": "git",

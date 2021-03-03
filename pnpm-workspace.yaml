@@ -1,3 +1,4 @@
 packages:
   - example/
-  - vue3-plugin/
+  - vue3-fetch-api/
+  - vue3-fetch-api/example/

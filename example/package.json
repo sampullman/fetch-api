@@ -1,0 +1,16 @@
+{
+  "name": "example",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.0.4"
+  },
+  "dependencies": {
+    "fetch-mock": "^9.11.0",
+    "@sampullman/fetch-api": "workspace:*"
+  }
+}

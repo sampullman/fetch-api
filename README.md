@@ -12,8 +12,6 @@
 
 ## Instructions
 
-> **Only works with bundlers or browsers that understand ES2015 modules**
-
 ### Install
 
 ```bash
@@ -25,10 +23,8 @@ yarn add @sampullman/fetch-api
 ```
 
 ```bash
-pnpm i -D @sampullman/fetch-api -D
+pnpm i -D @sampullman/fetch-api
 ```
-
-###
 
 
 ### Configuration
@@ -62,7 +58,7 @@ const api = new FetchApi({
     const { status } = res;
 
     if(status === 403) {
-      throw new Error('REQUEST_TIMEOUT');
+      throw new Error('FORBIDDEN');
     }
     res.data = await res.json();
     return res;
@@ -75,7 +71,7 @@ const status = api.request({ url: 'status/' });
 
 ## Environment
 
-`fetch` must be available. If you need to support older browsers, use a polyfill such as [whatwg-fetch](https://github.com/github/fetch)
+`fetch` must be available. If you need to support older browsers or Node, use a polyfill such as [whatwg-fetch](https://github.com/github/fetch)
 
 ## Example
 
