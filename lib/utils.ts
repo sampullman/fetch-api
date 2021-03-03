@@ -1,4 +1,4 @@
-import { FetchApiOptions, FetchRequestConfig, BasicAuth } from './types';
+import { FetchRequestConfig, BasicAuth } from './types';
 
 
 export function toArray<T>(arr: void | T | T[]): any[] {
@@ -11,7 +11,7 @@ export function toArray<T>(arr: void | T | T[]): any[] {
   return [arr];
 }
 
-export function authConfig(config: RequestInit): RequestInit {
+export function authConfig(config: FetchRequestConfig): FetchRequestConfig {
   return {
     ...config,
     credentials: 'include',
