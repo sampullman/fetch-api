@@ -1,6 +1,6 @@
 {
   "name": "@sampullman/fetch-api",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Small fetch wrapper for quickly prototyping API clients",
   "main": "dist/fetch-api.umd",
   "module": "dist/fetch-api.mjs",
