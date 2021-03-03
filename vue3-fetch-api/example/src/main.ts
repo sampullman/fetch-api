@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import FetchPlugin from '@sampullman/vue3-fetch-api';
+import { FetchApiPlugin } from '@sampullman/vue3-fetch-api';
 import App from './App.vue';
 
 const jsonInterceptor = async (res: Response) => {
@@ -8,7 +8,7 @@ const jsonInterceptor = async (res: Response) => {
 };
 
 createApp(App)
-  .use(FetchPlugin, {
+  .use(FetchApiPlugin, {
     responseInterceptors: [jsonInterceptor],
   })
   .mount('#app');
