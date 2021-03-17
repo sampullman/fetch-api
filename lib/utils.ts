@@ -1,4 +1,4 @@
-import { FetchRequestConfig, BasicAuth } from './types';
+import { FetchRequestConfig, BasicAuth, RequestParams } from './types';
 
 
 export function toArray<T>(arr: void | T | T[]): any[] {
@@ -29,6 +29,14 @@ export function prepareJson(data: any, config: RequestInit): RequestInit {
     },
     body: JSON.stringify(data),
   };
+}
+
+export function encodeParams(url: string, params: RequestParams) {
+  const encodedUrl = new URL(url);
+  if(params) {
+    encodedUrl.search = new URLSearchParams(params).toString();
+  }
+  return encodedUrl;
 }
 
 export function basicAuth(auth: BasicAuth, config: RequestInit): RequestInit {

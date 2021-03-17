@@ -6,7 +6,7 @@ import {
   FetchRequestConfig,
 } from './types';
 
-import { prepareJson, basicAuth, toArray } from './utils';
+import { prepareJson, basicAuth, encodeParams, toArray } from './utils';
 
 export class FetchApi {
   readonly baseUrl: string;
@@ -31,7 +31,15 @@ export class FetchApi {
     }
 
     // Transform FetchApiConfig into RequestInit for fetch
-    let { url, data, auth, timeout, ...finalConfig }: FetchApiConfig & RequestInit = config;
+    let {
+      url,
+      data,
+      params,
+      auth,
+      timeout,
+      ...finalConfig
+    }: FetchApiConfig & RequestInit = config;
+
     if(data) {
       finalConfig = prepareJson(data, finalConfig);
     }
@@ -47,7 +55,8 @@ export class FetchApi {
     }
 
     // Make `fetch` request, without timeout if configured
-    let request = fetch(`${this.baseUrl}${config.url}`, finalConfig);
+    url = encodeParams(`${this.baseUrl}${config.url}`, params).toString();
+    let request = fetch(url, finalConfig);
 
     let timeoutId = null;
     if(aborter) {

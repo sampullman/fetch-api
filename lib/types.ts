@@ -3,6 +3,8 @@
 export type RequestInterceptor = (config: Object) => Promise<Object>;
 export type ResponseInterceptor = (response: Response) => Promise<Response>;
 
+export type RequestParams = string | URLSearchParams | string[][] | Record<string, string> | undefined;
+
 export interface FetchApiOptions {
   /**
    * API base URL prepended to requests
@@ -56,6 +58,11 @@ export interface FetchApiConfig {
   data?: Object
 
   /**
+   * URL parameters appended to `url` using URLSearchParams
+   */
+  params?: RequestParams,
+
+  /**
    * Convenience option for providing Basic Auth headers
    * Overrides headers:
    * `headers['Authorization'] = \`Basic ${btoa(\`${auth.username}:${auth.password}\`)}\``
@@ -65,7 +72,7 @@ export interface FetchApiConfig {
 
   /**
    * Timeout in milliseconds. Falls back to global config timeout
-   * Overriddes `signal`
+   * Overrides `signal`
    * @default 10000
    */
   timeout?: number

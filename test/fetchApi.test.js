@@ -1,3 +1,4 @@
+const { URL, URLSearchParams } = require('url');
 const { fetchMock, FetchApi, jsonInterceptor } = require('./utils');
 const btoa = require('btoa');
 global.btoa = btoa;
@@ -34,6 +35,20 @@ describe('test response interceptors', () => {
     // The endpoint echos stringified JSON, transformed by `jsonInterceptor`
     const rsp = await api.request({ url: 'data/', method: 'POST', data });
     expect(rsp.data).toEqual(data);
+  });
+
+  it('tests request parameters', async () => {
+    const params = { a: '1', b: '2' };
+    const endpoint = 'https://cool.api/data/';
+    fetchMock.get(`begin:${endpoint}`, (url, _options) =>
+      ({ status: 200, body: JSON.stringify(url) }));
+
+    // The endpoint echos the URL rendered with parameters
+    const rsp = await api.request({ url: 'data/', params });
+
+    const targetUrl = new URL(endpoint);
+    targetUrl.search = new URLSearchParams(params).toString();
+    expect(rsp.data).toEqual(targetUrl.toString());
   });
 
   it('tests request auth', async () => {
