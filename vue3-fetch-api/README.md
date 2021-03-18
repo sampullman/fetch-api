@@ -25,3 +25,19 @@ yarn add @sampullman/vue3-fetch-api
 ```bash
 pnpm i -D @sampullman/vue3-fetch-api
 ```
+
+## Usage
+
+```
+import { createApp } from 'vue';
+import { FetchApiPlugin } from '@sampullman/vue3-fetch-api';
+import App from './App.vue';
+
+createApp(App)
+  .use(FetchApiPlugin, {
+    // Configuration
+  })
+  .mount('#app');
+```
+
+See [@sampullman/vue3-fetch-api](https://www.npmjs.com/package/@sampullman/fetch-api) for more configuration details.

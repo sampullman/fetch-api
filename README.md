@@ -39,6 +39,15 @@ FetchApi({
   // Default request timeout
   timeout: 10000,
 
+   // Stringified and used as fetch `body`. Sets headers: { Accept: 'application/json', 'Content-Type': 'application/json' }
+  data: null,
+
+  // Request URL parameters, e.g. `{ 'a': 1 }`. Passed to `new URLSearchParams(params)`
+  params?: RequestParams,
+
+  // Convenience for Basic Auth. Sets `headers['Authorization'] = \`Basic ${btoa(\`${auth.username}:${auth.password}\`)}\``
+  auth?: BasicAuth
+
   // Request interceptors
   requestInterceptors: [],
 
