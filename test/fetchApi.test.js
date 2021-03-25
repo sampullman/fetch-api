@@ -39,12 +39,13 @@ describe('test response interceptors', () => {
 
   it('tests request parameters', async () => {
     const params = { a: '1', b: '2' };
+    const paramsWidthUndef = { ...params, c: undefined };
     const endpoint = 'https://cool.api/data/';
     fetchMock.get(`begin:${endpoint}`, (url, _options) =>
       ({ status: 200, body: JSON.stringify(url) }));
 
     // The endpoint echos the URL rendered with parameters
-    const rsp = await api.request({ url: 'data/', params });
+    const rsp = await api.request({ url: 'data/', params: paramsWidthUndef });
 
     const targetUrl = new URL(endpoint);
     targetUrl.search = new URLSearchParams(params).toString();

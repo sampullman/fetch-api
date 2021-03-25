@@ -1,6 +1,6 @@
 {
   "name": "@sampullman/vue3-fetch-api",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Small fetch wrapper for quickly prototyping API clients",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

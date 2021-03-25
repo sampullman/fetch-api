@@ -6,7 +6,7 @@ import {
   FetchRequestConfig,
 } from './types';
 
-import { prepareJson, basicAuth, encodeParams, toArray } from './utils';
+import { prepareJson, basicAuth, encodeParams, toArray, filterUndefined } from './utils';
 
 export class FetchApi {
   readonly baseUrl: string;
@@ -53,6 +53,7 @@ export class FetchApi {
       aborter = new AbortController();
       config.signal = aborter.signal;
     }
+    params = filterUndefined(params);
 
     // Make `fetch` request, without timeout if configured
     url = encodeParams(`${this.baseUrl}${config.url}`, params).toString();

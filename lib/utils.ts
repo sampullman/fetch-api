@@ -1,5 +1,21 @@
 import { FetchRequestConfig, BasicAuth, RequestParams } from './types';
 
+type Filterable = {
+  [key: string]: any
+}
+
+export function filterUndefined(obj: RequestParams) {
+  if(typeof obj === 'object') {
+    const filteredObj: Filterable = {};
+    Object.entries(obj).forEach(([key, val]) => {
+      if(val !== undefined) {
+        filteredObj[key] = val;
+      }
+    });
+    return filteredObj;
+  }
+  return obj;
+}
 
 export function toArray<T>(arr: void | T | T[]): any[] {
   if(!arr) {
