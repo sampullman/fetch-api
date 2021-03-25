@@ -44,6 +44,7 @@ FetchApi({
   data: null,
 
   // Request URL parameters, e.g. `{ 'a': 1 }`. Passed to `new URLSearchParams(params)`
+  // Entries with undefined values are filtered out
   params: RequestParams,
 
   // Convenience for Basic Auth.

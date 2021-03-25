@@ -13,7 +13,7 @@
     "build": "rimraf dist && rollup -c rollup.config.js",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
-    "plugin:dev": "npm -C vue3-fetch-api run dev",
+    "plugin:dev": "npm -C vue3-fetch-api/example run dev",
     "plugin:build": "npm -C vue3-fetch-api run build",
     "build:all": "npm run build && npm run plugin:build",
     "build:test": "npm run build && jest",
