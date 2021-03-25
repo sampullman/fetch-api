@@ -1,6 +1,6 @@
 <h2 align='center'>@sampullman/vue3-fetch-api</h2>
 
-<p align='center'>Vue3 plugin for <a href="https://www.npmjs.com/package/@sampullman/fetch-api)">@sampullman/fetch-api</a></p>
+<p align='center'>Vue3 plugin for <a href="https://www.npmjs.com/package/@sampullman/fetch-api">@sampullman/fetch-api</a></p>
 
 <p align='center'>
 <a href='https://www.npmjs.com/package/@sampullman/fetch-api'>
