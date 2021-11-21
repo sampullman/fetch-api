@@ -1,15 +1,16 @@
+import { ResolvedRequestParams } from '.';
 import { FetchRequestConfig, BasicAuth, RequestParams } from './types';
 
 type Filterable = {
-  [key: string]: any
-}
+  [key: string]: any;
+};
 
-export function filterUndefined(obj: RequestParams) {
-  if(typeof obj === 'object') {
+export function resolveSearchParams(obj: RequestParams): ResolvedRequestParams {
+  if (typeof obj === 'object') {
     const filteredObj: Filterable = {};
     Object.entries(obj).forEach(([key, val]) => {
-      if(val !== undefined) {
-        filteredObj[key] = val;
+      if (val !== undefined) {
+        filteredObj[key] = val.toString();
       }
     });
     return filteredObj;
@@ -18,10 +19,10 @@ export function filterUndefined(obj: RequestParams) {
 }
 
 export function toArray<T>(arr: void | T | T[]): any[] {
-  if(!arr) {
+  if (!arr) {
     return [];
   }
-  if(Array.isArray(arr)) {
+  if (Array.isArray(arr)) {
     return arr;
   }
   return [arr];
@@ -47,9 +48,9 @@ export function prepareJson(data: any, config: RequestInit): RequestInit {
   };
 }
 
-export function encodeParams(url: string, params: RequestParams) {
+export function encodeParams(url: string, params: ResolvedRequestParams) {
   const encodedUrl = new URL(url);
-  if(params) {
+  if (params) {
     encodedUrl.search = new URLSearchParams(params).toString();
   }
   return encodedUrl;
@@ -62,8 +63,8 @@ export function basicAuth(auth: BasicAuth, config: RequestInit): RequestInit {
     ...rest,
     headers: {
       ...headers,
-      'Authorization': `Basic ${authData}`, 
+      Authorization: `Basic ${authData}`,
       'Content-Type': 'application/x-www-form-urlencoded',
-    }
-  }
+    },
+  };
 }

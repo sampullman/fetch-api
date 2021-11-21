@@ -1,7 +1,12 @@
 {
+  "ts-node": {
+    "moduleTypes": {
+      "jest.config.ts": "cjs"
+    }
+  },
   "compilerOptions": {
     "module": "ESNext",
-    "target": "es2017",
+    "target": "es2020",
     "lib": ["ESNext", "dom"],
     "esModuleInterop": true,
     "strict": true,
@@ -9,13 +14,13 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "declaration": true
+    "declaration": true,
+    "allowJs": true
   },
-  "exclude": [
-    "**/dist",
-    "**/node_modules",
-    "**/test",
-    "**/example",
-    "**/vue3-fetch-api"
-  ]
+  "references": [
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ],
+  "exclude": ["**/node_modules", "**/example", "**/vue3-fetch-api"]
 }

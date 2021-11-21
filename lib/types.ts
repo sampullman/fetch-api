@@ -1,44 +1,56 @@
-
-
 export type RequestInterceptor = (config: Object) => Promise<Object>;
-export type ResponseInterceptor = (response: Response) => Promise<Response>;
+export type ResponseInterceptor<T> = (response: T) => Promise<T>;
 
-export type RequestParams = string | URLSearchParams | string[][] | Record<string, string> | undefined;
+export type RequestParams =
+  | string
+  | URLSearchParams
+  | string[][]
+  | Record<string, string | number | undefined | null>
+  | undefined;
 
-export interface FetchApiOptions {
+export type ResolvedRequestParams =
+  | string
+  | URLSearchParams
+  | string[][]
+  | Record<string, string>
+  | undefined;
+
+export interface FetchApiOptions<ResponseType = Response> {
   /**
    * API base URL prepended to requests
    * @default ''
    */
-  baseUrl?: string
+  baseUrl?: string;
 
   /**
    * Default request timeout
    * @default 10000
    */
-  timeout?: number
+  timeout?: number;
 
   /**
    * Request interceptors
    */
-  requestInterceptors?: RequestInterceptor | RequestInterceptor[]
+  requestInterceptors?: RequestInterceptor | RequestInterceptor[];
 
   /**
    * Response interceptors
    */
-  responseInterceptors?: ResponseInterceptor | ResponseInterceptor[]
+  responseInterceptors?:
+    | ResponseInterceptor<ResponseType>
+    | ResponseInterceptor<ResponseType>[];
 }
 
 export interface BasicAuth {
   /**
    * Basic Auth username
    */
-  username: string
+  username: string;
 
   /**
    * Basic Auth password
    */
-  password: string
+  password: string;
 }
 
 export interface FetchApiConfig {
@@ -46,21 +58,21 @@ export interface FetchApiConfig {
    * The URL passed to `fetch`
    * @default ''
    */
-  url?: string
+  url?: string;
 
   /**
    * If present, `data` is stringified and used as `body`
    * Headers for JSON data are automatically included:
    *  { Accept: 'application/json', 'Content-Type': 'application/json' }
-   * 
+   *
    * WARNING - if preset, `body`, `headers['Accept']`, and `headers['Content-Type']` are overridden
    */
-  data?: Object
+  data?: Object;
 
   /**
    * URL parameters appended to `url` using URLSearchParams
    */
-  params?: RequestParams,
+  params?: RequestParams;
 
   /**
    * Convenience option for providing Basic Auth headers
@@ -68,14 +80,14 @@ export interface FetchApiConfig {
    * `headers['Authorization'] = \`Basic ${btoa(\`${auth.username}:${auth.password}\`)}\``
    * `
    */
-  auth?: BasicAuth
+  auth?: BasicAuth;
 
   /**
    * Timeout in milliseconds. Falls back to global config timeout
    * Overrides `signal`
    * @default 10000
    */
-  timeout?: number
+  timeout?: number;
 }
 
 export type FetchRequestConfig = FetchApiConfig & RequestInit;
