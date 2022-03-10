@@ -84,4 +84,16 @@ describe('test response interceptors', () => {
       method: 'POST',
     });
   });
+
+  it('tests ignoreBaseUrl', async () => {
+    (fetch as any).mockReturnValue({});
+
+    await api.request({
+      url: 'https://newroot/test',
+      ignoreBaseUrl: true,
+      method: 'GET',
+    });
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith('https://newroot/test', { method: 'GET' });
+  });
 });

@@ -42,6 +42,7 @@ export class FetchApi<ResponseType = Response> {
       params,
       auth,
       timeout,
+      ignoreBaseUrl,
       ...finalConfig
     }: FetchApiConfig & RequestInit = config;
 
@@ -61,7 +62,8 @@ export class FetchApi<ResponseType = Response> {
     const resolvedParams = resolveSearchParams(params);
 
     // Make `fetch` request, without timeout if configured
-    url = encodeParams(`${this.baseUrl}${config.url}`, resolvedParams).toString();
+    const baseUrl = ignoreBaseUrl ? '' : this.baseUrl;
+    url = encodeParams(`${baseUrl}${config.url}`, resolvedParams).toString();
     let request = fetch(url, finalConfig);
 
     let timeoutId = null;

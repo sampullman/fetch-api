@@ -61,6 +61,13 @@ export interface FetchApiConfig {
   url?: string;
 
   /**
+   * Ignore `baseUrl` in FetchApiOptions
+   * e.g. for calling third party APIs
+   * @default false
+   */
+  ignoreBaseUrl?: boolean;
+
+  /**
    * If present, `data` is stringified and used as `body`
    * Headers for JSON data are automatically included:
    *  { Accept: 'application/json', 'Content-Type': 'application/json' }
