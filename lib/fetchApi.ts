@@ -5,14 +5,13 @@ import {
   FetchApiConfig,
   FetchRequestConfig,
 } from './types';
-
 import {
   prepareJson,
   basicAuth,
   encodeParams,
   resolveSearchParams,
   toArray,
-} from './utils';
+} from './util';
 
 export class FetchApi<ResponseType = Response> {
   readonly baseUrl: string;
@@ -22,8 +21,10 @@ export class FetchApi<ResponseType = Response> {
 
   constructor(options: FetchApiOptions<ResponseType>) {
     const { timeout, baseUrl } = options;
-    this.responseInterceptors = toArray(options.responseInterceptors);
-    this.requestInterceptors = toArray(options.requestInterceptors);
+    this.responseInterceptors = toArray<ResponseInterceptor<ResponseType>>(
+      options.responseInterceptors,
+    );
+    this.requestInterceptors = toArray<RequestInterceptor>(options.requestInterceptors);
 
     this.baseUrl = baseUrl || '';
     this.timeout = timeout === undefined ? 10000 : timeout;

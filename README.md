@@ -26,7 +26,6 @@ yarn add @sampullman/fetch-api
 pnpm i -D @sampullman/fetch-api
 ```
 
-
 ### Configuration
 
 `FetchApi` global configuration is passed to the constructor.
@@ -66,15 +65,17 @@ Here is an example of basic usage that includes a response interceptor for handl
 ```ts
 const api = new FetchApi({
   baseUrl: 'https://cool.api/',
-  responseInterceptors: [async res => {
-    const { status } = res;
+  responseInterceptors: [
+    async (res) => {
+      const { status } = res;
 
-    if(status === 403) {
-      throw new Error('FORBIDDEN');
-    }
-    res.data = await res.json();
-    return res;
-  }],
+      if (status === 403) {
+        throw new Error('FORBIDDEN');
+      }
+      res.data = await res.json();
+      return res;
+    },
+  ],
 });
 
 // Make a get request to 'https://cool.api/status/'
@@ -87,7 +88,7 @@ const status = api.request({ url: 'status/' });
 
 ## Example
 
-See the `example` or `vue3-plugin/example` directory.
+See the `example` directory.
 
 ## License
 

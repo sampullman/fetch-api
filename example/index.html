@@ -8,15 +8,16 @@
   <body>
     <script type="module" src="/main.js"></script>
     <h1>Fetch Api Example</h1>
-    <h4>
-      This demo provides a fake API at <span>https://fetching.com/data/</span>
-    </h4>
+    <h4>This demo provides a fake API at <span>https://fetching.com/data/</span></h4>
     <div>Try to GET, POST, PUT, or DELETE some data. Other endpoints will time out.</div>
-    <div>Take a look at vue3-plugin/example for a more interesting demo.</div>
     <div id="inputs">
-      <div>URL: <input type="text" id="url-input" value="https://fetching.com/data/"></div>
-      <div>ID:  <input type="text" id="id-input" placeholder="Not needed for GET/POST"></div>
-      <div>Data: <input type="text" id="data-input"></div>
+      <div>
+        URL: <input type="text" id="url-input" value="https://fetching.com/data/" />
+      </div>
+      <div>
+        ID: <input type="text" id="id-input" placeholder="Not needed for GET/POST" />
+      </div>
+      <div>Data: <input type="text" id="data-input" /></div>
     </div>
     <div id="buttons">
       <button onclick="getData()">GET</button>
@@ -24,8 +25,6 @@
       <button onclick="putData()">PUT</button>
       <button onclick="deleteData()">DELETE</button>
     </div>
-    <div id="data">
-      API data displayed here: try to GET https://fetching.com/data/
-    </div>
+    <div id="data">API data displayed here: try to GET https://fetching.com/data/</div>
   </body>
 </html>

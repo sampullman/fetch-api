@@ -1,4 +1,10 @@
-import { expectedTestInfo, fetch, FetchApi, TestApiResponse } from './utils';
+import {
+  expectedTestInfo,
+  fetch,
+  FetchApi,
+  jsonInterceptor,
+  TestApiResponse,
+} from './utils';
 
 const errors = {
   forbidden: 'FORBIDDEN',
@@ -65,7 +71,6 @@ describe('test response interceptors', () => {
       return res;
     });
 
-    const statusData = { status: 'OK' };
     const requestConfig = { url: 'login/', method: 'POST', data: { errors: errorList } };
     const { expectedResponse } = expectedTestInfo(requestConfig);
     (fetch as any).mockReturnValue(expectedResponse);
@@ -73,5 +78,35 @@ describe('test response interceptors', () => {
     await expect(api.request({ url: 'login/', method: 'POST' })).rejects.toThrow(
       errorList[0],
     );
+  });
+
+  it('tests multiple response interceptors', async () => {
+    const statusData = { status: 'OK' };
+    const requestConfig = { url: 'status/', data: statusData };
+
+    api = new FetchApi<TestApiResponse>({
+      baseUrl: 'https://cool.api/',
+      timeout: 1000,
+      responseInterceptors: [
+        jsonInterceptor,
+        async (res: TestApiResponse) => {
+          const data = res.data as any;
+          res.data = {
+            status: data.status + data.status,
+          };
+          return res;
+        },
+      ],
+    });
+
+    const { expectedResponse, expectedRequest } = expectedTestInfo(requestConfig);
+    (fetch as any).mockReturnValue(expectedResponse);
+
+    const rsp = await api.request(requestConfig);
+    expect(rsp.data).toEqual({
+      status: 'OKOK',
+    });
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith('https://cool.api/status/', expectedRequest);
   });
 });
