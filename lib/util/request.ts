@@ -1,4 +1,4 @@
-import { RequestParams, ResolvedRequestParams } from '../types';
+import { RequestData, RequestParams, ResolvedRequestParams } from '../types';
 import { arrayToQuery } from './array';
 
 type Filterable = {
@@ -18,8 +18,14 @@ export function resolveSearchParams(obj: RequestParams): ResolvedRequestParams {
   return obj;
 }
 
-export function prepareJson(data: any, config: RequestInit): RequestInit {
+export function prepareJson(data: RequestData, config: RequestInit): RequestInit {
   const { headers, ...rest } = config;
+  if (data instanceof FormData) {
+    return {
+      ...config,
+      body: data,
+    };
+  }
   return {
     ...rest,
     headers: {

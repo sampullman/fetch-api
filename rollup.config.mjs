@@ -1,11 +1,9 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import sourceMaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
-import { terser } from 'rollup-plugin-terser';
+import terser from '@rollup/plugin-terser';
 import dts from 'rollup-plugin-dts';
-
-const pkg = require('./package.json');
+import pkg from './package.json' assert { type: 'json' };
 
 export default [
   {
@@ -25,7 +23,7 @@ export default [
       },
     ],
     external: Object.keys(pkg.devDependencies),
-    plugins: [typescript(), commonjs(), resolve(), sourceMaps()],
+    plugins: [typescript(), commonjs(), resolve()],
   },
   {
     input: './dist/lib/index.d.ts',

@@ -15,6 +15,8 @@ export type ResolvedRequestParams =
   | Record<string, string>
   | undefined;
 
+export type RequestData = Object | FormData;
+
 export interface FetchApiOptions<ResponseType = Response> {
   /**
    * API base URL prepended to requests
@@ -74,7 +76,7 @@ export interface FetchApiConfig {
    *
    * WARNING - if preset, `body`, `headers['Accept']`, and `headers['Content-Type']` are overridden
    */
-  data?: Object;
+  data?: RequestData;
 
   /**
    * URL parameters appended to `url` using URLSearchParams

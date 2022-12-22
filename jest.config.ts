@@ -1,10 +1,13 @@
 module.exports = {
   preset: 'ts-jest/presets/js-with-ts-esm',
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.spec.json',
-    },
+  transform: {
+    '^.+\\.(ts)$': [
+      'ts-jest',
+      {
+        tsconfig: './tsconfig.spec.json',
+      },
+    ],
   },
   transformIgnorePatterns: [],
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
 };
