@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 export type RequestInterceptor = (config: Object) => Promise<Object>;
 export type ResponseInterceptor<T> = (response: T) => Promise<T>;
 

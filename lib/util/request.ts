@@ -2,7 +2,7 @@ import { RequestData, RequestParams, ResolvedRequestParams } from '../types';
 import { arrayToQuery } from './array';
 
 type Filterable = {
-  [key: string]: any;
+  [key: string]: string;
 };
 
 export function resolveSearchParams(obj: RequestParams): ResolvedRequestParams {
