@@ -1,0 +1,43 @@
+name: PR Commit
+on:
+  pull_request:
+    branches: [main]
+env:
+  WORKSPACE_ROOT: .
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/env-setup
+      - name: Lint source code
+        run: pnpm run lint
+
+  check-format:
+    name: Check Format
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/env-setup
+      - name: Check code format
+        run: pnpm run format:check
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code into workspace directory
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/env-setup
+      - name: Run unit tests
+        run: pnpm run test

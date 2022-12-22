@@ -12,6 +12,8 @@
     "strict": true,
     "strictNullChecks": true,
     "moduleResolution": "node",
+    "sourceMap": true,
+    "sourceRoot": "/lib/",
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "declaration": true,
@@ -22,5 +24,11 @@
       "path": "./tsconfig.spec.json"
     }
   ],
-  "exclude": ["**/node_modules", "**/example", "**/tools/*"]
+  "exclude": [
+    "**/node_modules",
+    "**/example",
+    "**/tools/*",
+    "**/test/*",
+    "jest.config.ts"
+  ]
 }

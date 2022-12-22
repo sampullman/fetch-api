@@ -48,6 +48,29 @@ describe('test response interceptors', () => {
     expect(fetch).toHaveBeenCalledWith('https://cool.api/data/', expectedRequest);
   });
 
+  it('tests request form data', async () => {
+    const formData = new FormData();
+    formData.append('a', '1');
+    formData.append('b', new Blob(['12345']));
+    const requestConfig = { url: 'data/', method: 'POST', data: formData };
+    (fetch as any).mockReturnValue({
+      body: requestConfig.data,
+      json() {
+        return new Promise((resolve) => resolve(requestConfig.data));
+      },
+    });
+
+    // The endpoint echos the URL rendered with parameters
+    const rsp = await api.request(requestConfig);
+
+    expect(rsp.data).toEqual(formData);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith('https://cool.api/data/', {
+      method: 'POST',
+      body: formData,
+    });
+  });
+
   it('tests request parameters', async () => {
     const params = { a: '1', b: '2' };
     const paramsWidthUndef = { ...params, c: undefined };
