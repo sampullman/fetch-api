@@ -3,15 +3,16 @@ import fetch from 'node-fetch';
 const { Response } = jest.requireActual('node-fetch');
 import 'abort-controller/polyfill';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).fetch = fetch;
 
-import { FetchApi } from '../dist/fetch-api';
+import { FetchApi, FetchRequestConfig } from '../dist/fetch-api';
 
 export class TestApiResponse extends Response {
   data!: unknown;
 }
 
-export const expectedTestInfo = (reqConfig: any) => {
+export const expectedTestInfo = (reqConfig: FetchRequestConfig) => {
   return {
     expectedResponse: {
       body: JSON.stringify(reqConfig.data),

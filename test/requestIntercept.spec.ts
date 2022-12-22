@@ -7,7 +7,7 @@ describe('test request interceptors', () => {
       baseUrl: 'https://cool.api/',
       requestInterceptors: [
         async (config: FetchRequestConfig) => {
-          if (config.url!.startsWith('old')) {
+          if (config.url?.startsWith('old')) {
             config.method = 'POST';
           }
           return config;
@@ -15,7 +15,7 @@ describe('test request interceptors', () => {
       ],
     });
 
-    let rsp = await api.request({ url: 'old/stuff/' });
+    await api.request({ url: 'old/stuff/' });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('https://cool.api/old/stuff/', {
       method: 'POST',
@@ -23,7 +23,7 @@ describe('test request interceptors', () => {
 
     jest.resetAllMocks();
 
-    rsp = await api.request({ url: 'new/stuff/' });
+    await api.request({ url: 'new/stuff/' });
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith('https://cool.api/new/stuff/', {});
   });

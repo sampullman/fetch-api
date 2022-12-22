@@ -37,15 +37,17 @@ export class FetchApi<ResponseType = Response> {
     }
 
     // Transform FetchApiConfig into RequestInit for fetch
-    let {
+    const {
       url,
       data,
       params,
       auth,
       timeout,
       ignoreBaseUrl,
-      ...finalConfig
+      ...rest
     }: FetchApiConfig & RequestInit = config;
+
+    let finalConfig = rest;
 
     if (data) {
       finalConfig = prepareJson(data, finalConfig);
@@ -53,10 +55,10 @@ export class FetchApi<ResponseType = Response> {
     if (auth) {
       finalConfig = basicAuth(auth, finalConfig);
     }
-    timeout = timeout || this.timeout;
+    const abortTimeout = timeout || this.timeout;
 
     let aborter: AbortController | null = null;
-    if (timeout) {
+    if (abortTimeout) {
       aborter = new AbortController();
       config.signal = aborter?.signal;
     }
@@ -64,8 +66,8 @@ export class FetchApi<ResponseType = Response> {
 
     // Make `fetch` request, without timeout if configured
     const baseUrl = ignoreBaseUrl ? '' : this.baseUrl;
-    url = encodeParams(`${baseUrl}${config.url}`, resolvedParams).toString();
-    let request = fetch(url, finalConfig);
+    const finalUrl = encodeParams(`${baseUrl}${url}`, resolvedParams).toString();
+    const request = fetch(finalUrl, finalConfig);
 
     let timeoutId = null;
     if (aborter) {

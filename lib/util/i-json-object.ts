@@ -1,7 +1,7 @@
-export type AnyJson = boolean | number | string | null | IJsonArray | IJsonObject
+export type AnyJson = boolean | number | string | null | IJsonArray | IJsonObject;
 
 export interface IJsonObject {
-  [key: string]: AnyJson
+  [key: string]: AnyJson;
 }
 
-export interface IJsonArray extends Array<AnyJson> {}
+export type IJsonArray = Array<AnyJson>;

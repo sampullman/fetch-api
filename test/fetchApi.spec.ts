@@ -26,11 +26,11 @@ describe('test response interceptors', () => {
 
   it('tests request timeout', async () => {
     jest.useFakeTimers();
-    (fetch as any).mockReturnValue(
+    (fetch as jest.Mock).mockReturnValue(
       new Promise((resolve) => setTimeout(() => resolve(1), 1100)),
     );
 
-    const rsp = expect(api.request({ url: 'status/' })).rejects;
+    expect(api.request({ url: 'status/' })).rejects;
     jest.advanceTimersByTime(1100);
   });
 
@@ -39,7 +39,7 @@ describe('test response interceptors', () => {
 
     const requestConfig = { url: 'data/', method: 'POST', data };
     const { expectedResponse, expectedRequest } = expectedTestInfo(requestConfig);
-    (fetch as any).mockReturnValue(expectedResponse);
+    (fetch as jest.Mock).mockReturnValue(expectedResponse);
 
     // The endpoint echos stringified JSON, transformed by `jsonInterceptor`
     const rsp = await api.request(requestConfig);
@@ -53,7 +53,7 @@ describe('test response interceptors', () => {
     formData.append('a', '1');
     formData.append('b', new Blob(['12345']));
     const requestConfig = { url: 'data/', method: 'POST', data: formData };
-    (fetch as any).mockReturnValue({
+    (fetch as jest.Mock).mockReturnValue({
       body: requestConfig.data,
       json() {
         return new Promise((resolve) => resolve(requestConfig.data));
@@ -76,10 +76,10 @@ describe('test response interceptors', () => {
     const paramsWidthUndef = { ...params, c: undefined };
     const endpoint = 'https://cool.api/data/';
 
-    (fetch as any).mockReturnValue({});
+    (fetch as jest.Mock).mockReturnValue({});
 
     // The endpoint echos the URL rendered with parameters
-    const rsp = await api.request({ url: 'data/', params: paramsWidthUndef });
+    await api.request({ url: 'data/', params: paramsWidthUndef });
 
     const targetUrl = new URL(endpoint);
     targetUrl.search = new URLSearchParams(params).toString();
@@ -88,7 +88,7 @@ describe('test response interceptors', () => {
   });
 
   it('tests request auth', async () => {
-    (fetch as any).mockReturnValue({});
+    (fetch as jest.Mock).mockReturnValue({});
 
     const name = 'tester';
     const pw = 'tester123';
@@ -109,7 +109,7 @@ describe('test response interceptors', () => {
   });
 
   it('tests ignoreBaseUrl', async () => {
-    (fetch as any).mockReturnValue({});
+    (fetch as jest.Mock).mockReturnValue({});
 
     await api.request({
       url: 'https://newroot/test',
