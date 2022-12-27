@@ -60,7 +60,7 @@ export class FetchApi<ResponseType = Response> {
     let aborter: AbortController | null = null;
     if (abortTimeout) {
       aborter = new AbortController();
-      config.signal = aborter?.signal;
+      config.signal = (aborter || {}).signal;
     }
     const resolvedParams = resolveSearchParams(params);
 
