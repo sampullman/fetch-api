@@ -39,8 +39,9 @@ export function prepareJson(data: RequestData, config: RequestInit): RequestInit
 
 export function encodeParams(url: string, params: ResolvedRequestParams) {
   const encodedUrl = new URL(url);
-  if (params) {
-    encodedUrl.search = new URLSearchParams(params).toString();
+  const transformedParams = transformRequestParams(params);
+  if (transformedParams) {
+    encodedUrl.search = transformedParams.toString();
   }
   return encodedUrl;
 }

@@ -6,7 +6,7 @@ export type RequestParams =
   | string
   | URLSearchParams
   | string[][]
-  | Record<string, string | string[] | number | number[] | undefined | null>
+  | Record<string, string | string[] | number | number[] | undefined | unknown | null>
   | undefined;
 
 export type ResolvedRequestParams =
