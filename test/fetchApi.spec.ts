@@ -72,7 +72,7 @@ describe('test response interceptors', () => {
   });
 
   it('tests request parameters', async () => {
-    const params = { a: '1', b: '2' };
+    const params = { a: '1', b: '2', arr: [1, 2], things: { a: '1', b: 2 } };
     const paramsWidthUndef = { ...params, c: undefined };
     const endpoint = 'https://cool.api/data/';
 
@@ -82,9 +82,10 @@ describe('test response interceptors', () => {
     await api.request({ url: 'data/', params: paramsWidthUndef });
 
     const targetUrl = new URL(endpoint);
-    targetUrl.search = new URLSearchParams(params).toString();
+    targetUrl.search = '?a=1&b=2&arr[]=1&arr[]=2&things[a]=1&things[b]=2';
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(targetUrl.toString(), {});
+    const expected = `${endpoint}${targetUrl.search}`;
+    expect(fetch).toHaveBeenCalledWith(expected, {});
   });
 
   it('tests request auth', async () => {

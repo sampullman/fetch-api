@@ -1,5 +1,6 @@
 import { RequestData, RequestParams, ResolvedRequestParams } from '../types';
 import { arrayToQuery } from './array';
+import { objectToQuery } from './object';
 
 type Filterable = {
   [key: string]: string;
@@ -10,7 +11,7 @@ export function resolveSearchParams(obj: RequestParams): ResolvedRequestParams {
     const filteredObj: Filterable = {};
     Object.entries(obj).forEach(([key, val]) => {
       if (val !== undefined) {
-        filteredObj[key] = val.toString();
+        filteredObj[key] = val;
       }
     });
     return filteredObj;
@@ -60,6 +61,8 @@ export const transformRequestParams = (
   for (const [key, value] of entries) {
     if (Array.isArray(value)) {
       queryString += `&${arrayToQuery(key, value)}`;
+    } else if (typeof value === 'object' && value !== null) {
+      queryString += `&${objectToQuery(key, value)}`;
     } else if (value !== undefined) {
       queryString += `&${key}=${encodeURIComponent(value.toString())}`;
     }
