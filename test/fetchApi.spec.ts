@@ -1,5 +1,5 @@
 import btoa from 'btoa';
-import { URL, URLSearchParams } from 'url';
+import { URL } from 'url';
 import {
   FetchApi,
   jsonInterceptor,

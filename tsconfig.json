@@ -1,29 +1,27 @@
 {
-  "ts-node": {
-    "moduleTypes": {
-      "jest.config.ts": "cjs"
-    }
-  },
   "compilerOptions": {
     "module": "ESNext",
-    "target": "es2020",
+    "target": "ESNext",
+    "outDir": "dist/esm",
     "lib": ["ESNext", "dom"],
     "esModuleInterop": true,
     "strict": true,
-    "strictNullChecks": true,
     "moduleResolution": "node",
-    "sourceMap": true,
+    "inlineSourceMap": false,
+    "baseUrl": "lib",
+    "rootDir": "lib",
     "sourceRoot": "/lib/",
+    "sourceMap": true,
+    "listEmittedFiles": false,
+    "listFiles": false,
+    "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "declaration": true,
-    "allowJs": true
+    "allowJs": true,
+    "types": ["node", "jest"]
   },
-  "references": [
-    {
-      "path": "./tsconfig.spec.json"
-    }
-  ],
+  "include": ["lib"],
   "exclude": [
     "**/node_modules",
     "**/example",

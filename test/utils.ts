@@ -1,12 +1,13 @@
-jest.mock('node-fetch');
-import fetch from 'node-fetch';
-const { Response } = jest.requireActual('node-fetch');
-import 'abort-controller/polyfill';
-
+const fetch = jest.fn(() => {
+  return Promise.resolve({
+    body: 'mock-body',
+    json: Promise.resolve('mock-json'),
+  });
+});
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).fetch = fetch;
 
-import { FetchApi, FetchRequestConfig } from '../dist/fetch-api';
+import { FetchApi, FetchRequestConfig } from '../dist/cjs';
 
 export class TestApiResponse extends Response {
   data!: unknown;
@@ -37,4 +38,4 @@ const jsonInterceptor = async (res: TestApiResponse): Promise<TestApiResponse> =
     data: res.body ? await res.json() : null,
   } as unknown as TestApiResponse);
 
-export { FetchApi, jsonInterceptor, Response, fetch };
+export { FetchApi, jsonInterceptor, fetch, FetchRequestConfig };

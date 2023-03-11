@@ -1,5 +1,4 @@
-import { FetchRequestConfig } from '../dist/fetch-api';
-import { fetch, FetchApi, TestApiResponse } from './utils';
+import { fetch, FetchApi, TestApiResponse, FetchRequestConfig } from './utils';
 
 describe('test request interceptors', () => {
   it('converts certain requests to POST', async () => {

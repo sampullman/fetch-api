@@ -1,13 +1,11 @@
 module.exports = {
-  preset: 'ts-jest/presets/js-with-ts-esm',
+  preset: 'ts-jest',
   transform: {
-    '^.+\\.(ts)$': [
+    '^.+\\.([t]s)$': [
       'ts-jest',
       {
         tsconfig: './tsconfig.spec.json',
       },
     ],
   },
-  transformIgnorePatterns: [],
-  testEnvironment: 'jsdom',
 };
