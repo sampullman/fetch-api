@@ -55,7 +55,7 @@ export const transformRequestParams = (
   }
   const entries = Object.entries(params);
   if (entries.length === 0) {
-    return params;
+    return '';
   }
   let queryString = '';
   for (const [key, value] of entries) {

@@ -71,18 +71,34 @@ describe('test response interceptors', () => {
     });
   });
 
-  it('tests request parameters', async () => {
+  it('tests request query parameters', async () => {
     const params = { a: '1', b: '2', arr: [1, 2], things: { a: '1', b: 2 } };
     const paramsWidthUndef = { ...params, c: undefined };
-    const endpoint = 'https://cool.api/data/';
+    const endpoint = 'https://cool.api/query/';
 
     (fetch as jest.Mock).mockReturnValue({});
 
     // The endpoint echos the URL rendered with parameters
-    await api.request({ url: 'data/', params: paramsWidthUndef });
+    await api.request({ url: 'query/', params: paramsWidthUndef });
 
     const targetUrl = new URL(endpoint);
     targetUrl.search = '?a=1&b=2&arr[]=1&arr[]=2&things[a]=1&things[b]=2';
+    expect(fetch).toHaveBeenCalledTimes(1);
+    const expected = `${endpoint}${targetUrl.search}`;
+    expect(fetch).toHaveBeenCalledWith(expected, {});
+  });
+
+  it('tests empty request query parameters', async () => {
+    const params = {};
+    const endpoint = 'https://cool.api/query/';
+
+    (fetch as jest.Mock).mockReturnValue({});
+
+    // The endpoint echos the URL rendered with parameters
+    await api.request({ url: 'query/', params });
+
+    const targetUrl = new URL(endpoint);
+    targetUrl.search = '';
     expect(fetch).toHaveBeenCalledTimes(1);
     const expected = `${endpoint}${targetUrl.search}`;
     expect(fetch).toHaveBeenCalledWith(expected, {});
