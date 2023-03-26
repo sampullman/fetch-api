@@ -6,7 +6,7 @@ import {
   FetchRequestConfig,
 } from './types';
 import {
-  prepareJson,
+  prepareBody,
   basicAuth,
   encodeParams,
   resolveSearchParams,
@@ -50,8 +50,8 @@ export class FetchApi<ResponseType = Response> {
 
     let finalConfig = rest;
 
-    if (data && (requestJson ?? true)) {
-      finalConfig = prepareJson(data, finalConfig);
+    if (data) {
+      finalConfig = prepareBody(data, finalConfig, requestJson ?? true);
     }
     if (auth) {
       finalConfig = basicAuth(auth, finalConfig);

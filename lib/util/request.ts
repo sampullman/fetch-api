@@ -19,12 +19,16 @@ export function resolveSearchParams(obj: RequestParams): ResolvedRequestParams {
   return obj;
 }
 
-export function prepareJson(data: RequestData, config: RequestInit): RequestInit {
+export function prepareBody(
+  data: RequestData,
+  config: RequestInit,
+  isJson: boolean,
+): RequestInit {
   const { headers, ...rest } = config;
-  if (data instanceof FormData) {
+  if (!isJson || data instanceof FormData) {
     return {
       ...config,
-      body: data,
+      body: data as BodyInit,
     };
   }
   return {
