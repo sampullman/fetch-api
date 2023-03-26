@@ -44,12 +44,13 @@ export class FetchApi<ResponseType = Response> {
       auth,
       timeout,
       ignoreBaseUrl,
+      requestJson,
       ...rest
     }: FetchApiConfig & RequestInit = config;
 
     let finalConfig = rest;
 
-    if (data) {
+    if (data && (requestJson ?? true)) {
       finalConfig = prepareJson(data, finalConfig);
     }
     if (auth) {

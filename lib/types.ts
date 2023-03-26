@@ -71,6 +71,12 @@ export interface FetchApiConfig {
   ignoreBaseUrl?: boolean;
 
   /**
+   * Convert request `data` to JSON
+   * @default true
+   */
+  requestJson?: boolean;
+
+  /**
    * If present, `data` is stringified and used as `body`
    * Headers for JSON data are automatically included:
    *  { Accept: 'application/json', 'Content-Type': 'application/json' }
