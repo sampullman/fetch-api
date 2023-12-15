@@ -11,7 +11,7 @@ import {
   encodeParams,
   resolveSearchParams,
   toArray,
-} from './util';
+} from './util/index.js';
 
 export class FetchApi<ResponseType = Response> {
   readonly baseUrl: string;
