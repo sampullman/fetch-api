@@ -36,6 +36,6 @@ const jsonInterceptor = async (res: TestApiResponse): Promise<TestApiResponse> =
   ({
     ...res,
     data: res.body ? await res.json() : null,
-  } as unknown as TestApiResponse);
+  }) as unknown as TestApiResponse;
 
 export { FetchApi, jsonInterceptor, fetch, FetchRequestConfig };

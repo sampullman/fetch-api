@@ -4,7 +4,7 @@ import {
   FetchApiOptions,
   FetchApiConfig,
   FetchRequestConfig,
-} from './types';
+} from './types.js';
 import {
   prepareBody,
   basicAuth,

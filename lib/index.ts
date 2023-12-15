@@ -1,6 +1,6 @@
-import { FetchApi } from './fetchApi';
+import { FetchApi } from './fetchApi.js';
 
-export * from './types';
+export * from './types.js';
 export * from './util';
 
 export { FetchApi };

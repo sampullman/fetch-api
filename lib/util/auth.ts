@@ -1,4 +1,4 @@
-import { BasicAuth, FetchRequestConfig } from '../types';
+import { BasicAuth, FetchRequestConfig } from '../types.js';
 
 export function authConfig(config: FetchRequestConfig): FetchRequestConfig {
   return {

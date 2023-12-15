@@ -1,6 +1,6 @@
-import { RequestData, RequestParams, ResolvedRequestParams } from '../types';
-import { arrayToQuery } from './array';
-import { objectToQuery } from './object';
+import { RequestData, RequestParams, ResolvedRequestParams } from '../types.js';
+import { arrayToQuery } from './array.js';
+import { objectToQuery } from './object.js';
 
 type Filterable = {
   [key: string]: string;

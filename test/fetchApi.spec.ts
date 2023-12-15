@@ -1,4 +1,3 @@
-import btoa from 'btoa';
 import { URL } from 'url';
 import {
   FetchApi,
@@ -7,7 +6,6 @@ import {
   fetch,
   expectedTestInfo,
 } from './utils';
-global.btoa = btoa;
 
 describe('test response interceptors', () => {
   let api: FetchApi<TestApiResponse>;
