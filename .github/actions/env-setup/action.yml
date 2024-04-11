@@ -3,9 +3,9 @@ description: 'Setup PNPM and Node'
 runs:
   using: 'composite'
   steps:
-    - uses: actions/setup-node@v3
+    - uses: actions/setup-node@v4
       with:
-        node-version: '16'
+        node-version: '20'
         registry-url: 'https://registry.npmjs.org'
     - name: Cache pnpm modules
       uses: actions/cache@v2
@@ -14,9 +14,9 @@ runs:
         key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
           ${{ runner.os }}-
-    - uses: pnpm/action-setup@v2.2.4
+    - uses: pnpm/action-setup@v3.0.0
       with:
-        version: 7.18.0
+        version: 8.15.3
         run_install: true
     - name: Build
       shell: bash

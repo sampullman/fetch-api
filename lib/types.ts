@@ -6,6 +6,7 @@ export type RequestParams =
   | string
   | URLSearchParams
   | string[][]
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   | Record<string, string | string[] | number | number[] | undefined | unknown | null>
   | undefined;
 

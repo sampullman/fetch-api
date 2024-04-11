@@ -72,7 +72,7 @@ export class FetchApi<ResponseType = Response> {
 
     let timeoutId = null;
     if (aborter) {
-      timeoutId = setTimeout(() => (aborter as AbortController).abort(), timeout);
+      timeoutId = setTimeout(() => aborter.abort(), timeout);
     }
     let response = (await request) as unknown as ResponseType;
     if (timeoutId !== null) {
