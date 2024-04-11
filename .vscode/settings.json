@@ -2,5 +2,9 @@
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
+  "[json]": {
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true
+  },
   "eslint.experimental.useFlatConfig": true
 }
