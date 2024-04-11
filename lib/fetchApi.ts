@@ -14,8 +14,8 @@ import {
 } from './util/index.js';
 
 export class FetchApi<ResponseType = Response> {
-  readonly baseUrl: string;
-  readonly timeout: number;
+  baseUrl: string;
+  timeout: number;
   requestInterceptors: RequestInterceptor[];
   responseInterceptors: ResponseInterceptor<ResponseType>[];
 
